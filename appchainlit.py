@@ -117,7 +117,8 @@ async def interactive_chat(
  
     # Define the system prompt to set context and guidelines for the AI assistant
     system_prompt = AZURE_OPENAI_PROMPT
-    history.add_system_message(system_prompt)
+    if system_prompt:
+        history.add_message({"role": "system", "content": system_prompt})
  
     # Start the interactive chat loop
     while True:
@@ -193,12 +194,11 @@ if __name__ == "__main__":
     except Exception as e:
         logging.error(f"Application terminated with error: {e}")
  
-history.add_system_message(AZURE_OPENAI_PROMPT)
-
 @cl.on_chat_start
 async def on_chat_start():    
     historychainlit = ChatHistory()
-    historychainlit.add_system_message(AZURE_OPENAI_PROMPT)
+    if AZURE_OPENAI_PROMPT:
+        historychainlit.add_message({"role": "system", "content": AZURE_OPENAI_PROMPT})
     cl.user_session.set(cl.user_session.get("id"), historychainlit)
     print("========= on_chat_start ==========")
     
