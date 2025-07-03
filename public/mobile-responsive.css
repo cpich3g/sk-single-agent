@@ -1,0 +1,312 @@
+/* Mobile-First Responsive CSS for Chainlit Application */
+
+/* Base viewport and responsive foundation */
+:root {
+  --mobile-padding: 12px;
+  --mobile-margin: 8px;
+  --touch-target-size: 44px;
+  --mobile-font-size: 16px;
+  --mobile-line-height: 1.5;
+}
+
+/* Ensure proper viewport behavior with safe area support */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Support for viewport-fit=cover */
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Mobile-first responsive layout */
+@media (max-width: 768px) {
+  /* Main chat container adjustments */
+  .chainlit-chat {
+    padding: var(--mobile-padding);
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Chat messages container */
+  .cl-chat-container {
+    padding: var(--mobile-padding);
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Message bubbles */
+  .cl-message {
+    max-width: 100%;
+    padding: 12px;
+    margin: var(--mobile-margin) 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* User message styling */
+  .cl-user-message {
+    margin-right: var(--mobile-margin);
+    margin-left: auto;
+    max-width: 85%;
+  }
+
+  /* Assistant message styling */
+  .cl-assistant-message {
+    margin-left: var(--mobile-margin);
+    margin-right: auto;
+    max-width: 90%;
+  }
+
+  /* Input area optimization */
+  .cl-input-container {
+    padding: var(--mobile-padding);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-color, #ffffff);
+    border-top: 1px solid var(--border-color, #e0e0e0);
+    z-index: 1000;
+  }
+
+  .cl-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--mobile-margin);
+    max-width: 100%;
+  }
+
+  /* Text input optimization */
+  .cl-text-input,
+  input[type="text"],
+  textarea {
+    font-size: var(--mobile-font-size);
+    line-height: var(--mobile-line-height);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color, #d0d0d0);
+    flex: 1;
+    min-height: var(--touch-target-size);
+    resize: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  /* Button optimization for touch */
+  .cl-button,
+  button {
+    min-height: var(--touch-target-size);
+    min-width: var(--touch-target-size);
+    padding: 12px 16px;
+    font-size: var(--mobile-font-size);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+  }
+
+  /* Send button specific styling */
+  .cl-send-button {
+    background-color: var(--primary-color, #007bff);
+    color: white;
+    border-radius: 50%;
+    width: var(--touch-target-size);
+    height: var(--touch-target-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Image display optimization */
+  .cl-image,
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: var(--mobile-margin) 0;
+  }
+
+  /* Image container */
+  .cl-image-container {
+    max-width: 100%;
+    overflow: hidden;
+    margin: var(--mobile-margin) 0;
+  }
+
+  /* File upload area */
+  .cl-file-upload {
+    padding: var(--mobile-padding);
+    border: 2px dashed var(--border-color, #d0d0d0);
+    border-radius: 8px;
+    text-align: center;
+    margin: var(--mobile-margin) 0;
+    min-height: var(--touch-target-size);
+  }
+
+  /* Sidebar adjustments */
+  .cl-sidebar {
+    width: 100%;
+    max-width: 300px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .cl-sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Header adjustments */
+  .cl-header {
+    padding: var(--mobile-padding);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: var(--bg-color, #ffffff);
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+  }
+
+  /* Typography adjustments */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: var(--mobile-line-height);
+    margin: var(--mobile-margin) 0;
+  }
+
+  p {
+    font-size: var(--mobile-font-size);
+    line-height: var(--mobile-line-height);
+    margin: var(--mobile-margin) 0;
+  }
+
+  /* Code blocks */
+  pre, code {
+    overflow-x: auto;
+    font-size: 14px;
+    padding: var(--mobile-padding);
+    border-radius: 4px;
+    background-color: var(--code-bg, #f5f5f5);
+  }
+
+  /* Loading indicators */
+  .cl-loading {
+    padding: var(--mobile-padding);
+  }
+
+  /* Error messages */
+  .cl-error {
+    padding: var(--mobile-padding);
+    margin: var(--mobile-margin) 0;
+    border-radius: 8px;
+    background-color: var(--error-bg, #fee);
+    border: 1px solid var(--error-border, #fcc);
+  }
+
+  /* Welcome screen adjustments */
+  .cl-welcome {
+    padding: var(--mobile-padding);
+    margin: var(--mobile-margin);
+  }
+
+  /* Chat history/session management */
+  .cl-session-list {
+    padding: var(--mobile-padding);
+  }
+
+  .cl-session-item {
+    padding: var(--mobile-padding);
+    margin: var(--mobile-margin) 0;
+    min-height: var(--touch-target-size);
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cl-chat-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .cl-message {
+    max-width: 75%;
+  }
+}
+
+/* Large screen adjustments */
+@media (min-width: 1025px) {
+  .cl-chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+}
+
+/* Touch-specific improvements */
+@media (pointer: coarse) {
+  /* Increase touch targets */
+  .cl-button,
+  button,
+  .cl-touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Improve scroll behavior */
+  .cl-scrollable {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --border-color: #404040;
+    --code-bg: #2d2d2d;
+    --error-bg: #3d1a1a;
+    --error-border: #5d2a2a;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus improvements for keyboard navigation */
+.cl-button:focus,
+.cl-text-input:focus,
+button:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--focus-color, #007bff);
+  outline-offset: 2px;
+}
+
+/* Fix for iOS zoom on input focus */
+@supports (-webkit-touch-callout: none) {
+  .cl-text-input,
+  input[type="text"],
+  textarea {
+    font-size: 16px;
+  }
+}

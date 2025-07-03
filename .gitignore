@@ -1,5 +1,4 @@
-# Ignore markdown and Flask files
-chainlit.md
+# Ignore markdown and Flask files (keeping chainlit.md for mobile improvements)
 appflask.py
 
 .env
@@ -20,5 +19,6 @@ api_function_app/host.json
 __pycache__/
 *.pyc
 *.pyo
-.chainlit/
+# Keep .chainlit config for mobile improvements but ignore other chainlit files
+.chainlit/translations/
 .files

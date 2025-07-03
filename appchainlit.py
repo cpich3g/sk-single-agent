@@ -223,25 +223,29 @@ async def handle_message(message: cl.Message):
     # Maintain chat history
     historychainlit.add_user_message(user_input)
    
- 
-    # Get AI response
-    result = await chat_completion.get_chat_message_content(
-        chat_history=historychainlit,
-        settings=settings,
-        kernel=kernel,
-    )
- 
-    response_text = str(result)  # Convert response to string
+
+    # Get AI response with error handling
+    try:
+        result = await chat_completion.get_chat_message_content(
+            chat_history=historychainlit,
+            settings=settings,
+            kernel=kernel,
+        )
+        response_text = str(result)  # Convert response to string
+    except Exception as e:
+        logging.error(f"Error getting AI response: {e}")
+        response_text = "I apologize, but I'm having trouble processing your request right now. Please try again in a moment. 🤖"
     historychainlit.add_message({"role": "assistant", "content": response_text})
     #await cl.Message(content=response_text).send()
-    # If response is a base64 image, show it as an image element
+    # If response is a base64 image, show it as an image element with mobile-friendly settings
     if response_text.startswith("data:image/png;base64,"):
         await cl.Message(
             content="Here is the generated plot:",
             elements=[
                 cl.Image(
-                    name="Financial Plot",
+                    name="Water Theme Park Plot",
                     display="inline",
+                    size="large",  # Better for mobile viewing
                     image=response_text  # this is the base64 image string
                 )
             ]
