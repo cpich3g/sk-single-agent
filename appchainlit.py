@@ -117,7 +117,8 @@ async def interactive_chat(
  
     # Define the system prompt to set context and guidelines for the AI assistant
     system_prompt = AZURE_OPENAI_PROMPT
-    history.add_system_message(system_prompt)
+    if system_prompt:
+        history.add_message({"role": "system", "content": system_prompt})
  
     # Start the interactive chat loop
     while True:
@@ -193,12 +194,11 @@ if __name__ == "__main__":
     except Exception as e:
         logging.error(f"Application terminated with error: {e}")
  
-history.add_system_message(AZURE_OPENAI_PROMPT)
-
 @cl.on_chat_start
 async def on_chat_start():    
     historychainlit = ChatHistory()
-    historychainlit.add_system_message(AZURE_OPENAI_PROMPT)
+    if AZURE_OPENAI_PROMPT:
+        historychainlit.add_message({"role": "system", "content": AZURE_OPENAI_PROMPT})
     cl.user_session.set(cl.user_session.get("id"), historychainlit)
     print("========= on_chat_start ==========")
     
@@ -223,25 +223,29 @@ async def handle_message(message: cl.Message):
     # Maintain chat history
     historychainlit.add_user_message(user_input)
    
- 
-    # Get AI response
-    result = await chat_completion.get_chat_message_content(
-        chat_history=historychainlit,
-        settings=settings,
-        kernel=kernel,
-    )
- 
-    response_text = str(result)  # Convert response to string
+
+    # Get AI response with error handling
+    try:
+        result = await chat_completion.get_chat_message_content(
+            chat_history=historychainlit,
+            settings=settings,
+            kernel=kernel,
+        )
+        response_text = str(result)  # Convert response to string
+    except Exception as e:
+        logging.error(f"Error getting AI response: {e}")
+        response_text = "I apologize, but I'm having trouble processing your request right now. Please try again in a moment. 🤖"
     historychainlit.add_message({"role": "assistant", "content": response_text})
     #await cl.Message(content=response_text).send()
-    # If response is a base64 image, show it as an image element
+    # If response is a base64 image, show it as an image element with mobile-friendly settings
     if response_text.startswith("data:image/png;base64,"):
         await cl.Message(
             content="Here is the generated plot:",
             elements=[
                 cl.Image(
-                    name="Financial Plot",
+                    name="Water Theme Park Plot",
                     display="inline",
+                    size="large",  # Better for mobile viewing
                     image=response_text  # this is the base64 image string
                 )
             ]

@@ -1,14 +1,24 @@
-# Welcome to Chainlit! 🚀🤖
+# Welcome to Water Theme Park Assistant! 🌊🎢
 
-Hi there, Developer! 👋 We're excited to have you on board. Chainlit is a powerful tool designed to help you prototype, debug and share applications built on top of LLMs.
+Your mobile-friendly AI assistant for exploring our amazing Water Theme Park! 
 
-## Useful Links 🔗
+## What I Can Help You With 🎯
 
-- **Documentation:** Get started with our comprehensive [Chainlit Documentation](https://docs.chainlit.io) 📚
-- **Discord Community:** Join our friendly [Chainlit Discord](https://discord.gg/k73SQ3FyUh) to ask questions, share your projects, and connect with other developers! 💬
+- **🎢 Attractions & Rides** - Get info about rides, height requirements, wait times
+- **🐠 Animal Exhibits** - Learn about our marine life and feeding experiences  
+- **🗺️ Park Navigation** - Find locations, get directions around the park
+- **🛍️ Shop Inventory** - Check available toys, souvenirs, and prices
+- **🎫 General Info** - Operating hours, amenities, dining options
 
-We can't wait to see what you create with Chainlit! Happy coding! 💻😊
+## Mobile Tips 📱
 
-## Welcome screen
+- **Tap and hold** messages to copy text
+- **Pinch to zoom** on images and maps
+- **Swipe** to navigate between conversations
+- **Voice input** supported for hands-free questions
 
-To modify the welcome screen, edit the `chainlit.md` file at the root of your project. If you do not want a welcome screen, just leave this file empty.
+Just ask me anything about the Water Theme Park - I'm here to make your visit amazing! 💙
+
+---
+
+*Optimized for mobile devices - enjoy your park experience!*
